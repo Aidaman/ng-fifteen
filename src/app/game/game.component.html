@@ -1,5 +1,5 @@
 <div class="wrapper">
   <div class="Game">
-    <div class="element" *ngFor="let index of arr15" [textContent]="index"></div>
+    <div class="element" (click)="SwitchPosition(this)" *ngFor="let index of arr15" id="{{'Element-'+index}}" [textContent]="index"></div>
   </div>
 </div>

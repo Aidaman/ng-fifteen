@@ -44,3 +44,7 @@
   border: 1px #777 dot-dot-dash;
   border-radius: 5px;
 }
+.empty{
+  border: 3px #37659b dot-dot-dash;
+  border-radius: 5px;
+}
