@@ -18,8 +18,8 @@
 }
 .Game{
   display: grid;
-  grid-template-columns: 100px 100px 100px 100px;
-  grid-template-rows: 100px 100px 100px 100px ;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 1fr);
 
   background: white;
 
@@ -39,7 +39,7 @@
   justify-content: center;
 
   margin: 0.5rem;
-  padding: 5px;
+  padding: 50px;
 
   border: 1px #777 dot-dot-dash;
   border-radius: 5px;
