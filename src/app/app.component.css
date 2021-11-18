@@ -1,0 +1,46 @@
+.container{
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+
+  overflow: auto;
+
+  background: #333;
+  color: white;
+
+  height: 100%;
+  width: 100%;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+
+
+}
+.mainHeader{
+  color: #00c4ff;
+
+  font-size: 30px;
+  font-weight: 600;
+  font-family: "JetBrains Mono Medium", Serif;
+
+  text-align: center;
+}
+.choiceBox{
+  display: grid;
+
+  grid-template-columns: repeat(2, minmax(100px, 1fr));
+  grid-column-gap: 2rem;
+
+}
+.choiceButton{
+  font-size: 15px;
+  font-weight: 300;
+  font-family: "JetBrains Mono Medium", Serif;
+
+  text-align: center;
+  padding: 25px;
+}

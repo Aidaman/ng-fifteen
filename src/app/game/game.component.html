@@ -1,5 +1,15 @@
 <div class="wrapper">
   <div class="Game">
-    <div class="element" (click)="SwitchPosition(this)" *ngFor="let index of arr15" id="{{'Element-'+index}}" [textContent]="index"></div>
+    <div class="{{index.viewValue}}" (click)="SwitchPosition(index)" *ngFor="let index of arr15">{{index.content}}</div>
+  </div>
+  <div class="menu">
+    <div class="Timer">
+      <span [innerHTML]="minutes > 9 ? minutes : '0'+minutes.toString()"></span> : <span [innerHTML]="seconds > 9 ? seconds : '0'+seconds.toString()"></span>
+    </div>
+    <button (click)="Mix()" class="gameButton">Reset</button>
+    <button (click)="Solve()" class="gameButton">Solve</button>
+    <button (click)="CheckCorrect()" class="gameButton">Done</button>
+    <button (click)="DirectTo('')" class="gameButton" id="goToMain">Main Menu</button>
   </div>
 </div>
+<!--for (let i = 0; i< n; i++)-->

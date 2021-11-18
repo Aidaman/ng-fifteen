@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Project15112021ComandProject';
+
+  constructor(private router: Router) {
+  }
+
+  directTo(url: string) : void {
+    this.router.navigate([url]);
+  }
 }

@@ -3,6 +3,18 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { GameComponent } from './game/game.component';
+import {RouterModule} from "@angular/router";
+
+const routes = [
+  {
+    path: "ClassicGame",
+    component: GameComponent
+  },
+  {
+    path: "ClassicGame",
+    component: GameComponent
+  }
+]
 
 @NgModule({
   declarations: [
@@ -10,7 +22,8 @@ import { GameComponent } from './game/game.component';
     GameComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    RouterModule.forRoot(routes)
   ],
   providers: [],
   bootstrap: [AppComponent]
