@@ -10,10 +10,6 @@ const routes = [
     path: "ClassicGame",
     component: GameComponent
   },
-  {
-    path: "ClassicGame",
-    component: GameComponent
-  }
 ]
 
 @NgModule({

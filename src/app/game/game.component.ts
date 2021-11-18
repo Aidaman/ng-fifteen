@@ -2,6 +2,12 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {interval, Observable, Subscription} from "rxjs";
 
+export interface IElement {
+  viewValue: string,
+  content: string,
+  value: number
+}
+
 @Component({
   selector: 'app-game',
   templateUrl: './game.component.html',
@@ -11,31 +17,13 @@ import {interval, Observable, Subscription} from "rxjs";
 export class GameComponent implements OnInit{
   private IsSolvedAuto: boolean = false;
   private isFirstMove: boolean = false;
-
-  ngOnInit(): void {
-  }
-
-  constructor(private router: Router) {
-    this.Mix();
-    console.log(this.arr15);
-  }
-
-  //Timer logic
-  public minutes: number = 0;
-  public seconds: number = 0;
   private $tick: Observable<number> = interval(1000);
   private subscription!: Subscription;
 
-  private count() : void{
-    this.seconds++;
-    if (this.seconds >= 60) {
-      ++this.minutes;
-      this.seconds = 0;
-    }
-  }
+  public minutes: number = 0;
+  public seconds: number = 0;
 
-  //Game logic
-  public arr15 = [
+  public arr15: IElement[] = [
     {
       viewValue: 'empty',
       content: '',
@@ -117,35 +105,58 @@ export class GameComponent implements OnInit{
       value: 15
     },
   ]
-  SwitchPosition(arg : any) : void {
+
+  constructor(private router: Router) {
+  }
+
+  ngOnInit(): void {
+    this.Mix();
+  }
+
+  //Timer logic
+  private count() : void{
+    this.seconds++;
+    if (this.seconds >= 60) {
+      ++this.minutes;
+      this.seconds = 0;
+    }
+  }
+
+  //Game logic
+  public SwitchPosition(arg : IElement) : void {
     if (!this.isFirstMove){
       this.isFirstMove = true;
       this.subscription = this.$tick.subscribe( () => {this.count()})
     }
 
+    let correctArr = this.arr15.slice(0).sort((a, b) => a.value-b.value);
     let tmp  =  this.arr15[this.arr15.findIndex(val => val.value == arg.value)];
     let tmpIndex : number  =  this.arr15.findIndex(val => val.value == arg.value);
     let zeroElemIndex : number = this.arr15.findIndex(val => val.value == 0);
+
     if (tmpIndex == zeroElemIndex+1 || tmpIndex == zeroElemIndex+4 || tmpIndex == zeroElemIndex-1 || tmpIndex == zeroElemIndex-4){
       this.arr15[tmpIndex] = this.arr15[zeroElemIndex];
       this.arr15[zeroElemIndex] = tmp;
     }
+    if (this.arr15 === correctArr){
+      this.CheckCorrect();
+    }
   }
 
-  Mix() {
+  public Mix() : void {
     for (let i= 0; i <10; i++){
       this.arr15.sort(()=>Math.random() -0.5)
     }
   }
 
-  Solve() {
+  public Solve() : void {
     this.arr15 = this.arr15.sort((a, b) => a.value-b.value);
-
     this.IsSolvedAuto = true;
+
+    this.CheckCorrect();
   }
 
-  CheckCorrect() {
-    //let tmp = this.arr15.slice(0);
+  private CheckCorrect() : any {
     let Checked : boolean = this.arr15 === this.arr15.slice(0).sort((a, b) => a.value-b.value);
     if (this.IsSolvedAuto){
       alert("Okay, you've done, but not with yourself. It took for you " + this.minutes + " mins & " + this.seconds + " secs");
@@ -158,7 +169,7 @@ export class GameComponent implements OnInit{
     alert("Nope it's not done");
   }
 
-  DirectTo(url: string) {
+  public DirectTo(url: string): void {
     this.router.navigate([url]);
   }
 }
